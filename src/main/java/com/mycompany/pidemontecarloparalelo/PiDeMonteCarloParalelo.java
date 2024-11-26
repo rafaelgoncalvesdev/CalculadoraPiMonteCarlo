@@ -11,33 +11,44 @@ import java.util.Scanner;
  *
  * @author rafael
  */
+
+/**
+ * Classe principal que inicia o cálculo de Pi utilizando o método de Monte Carlo de forma paralela.
+ */
 public class PiDeMonteCarloParalelo {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+
+        // Solicita ao usuário o número total de pontos a serem gerados
         System.out.print("Digite o número total de pontos: ");
         long numPontos = scanner.nextLong(); // Lê o número total de pontos    
         scanner.close();
         
-        // Chama o método estático iniciar()
+        // Inicia o cálculo passando o número total de pontos para o método 'iniciar'
         iniciar(numPontos);
     }
     
-    // Torna o método iniciar estático
+    /**
+     * Inicia o cálculo paralelo de Pi com o número de pontos especificado.
+     * Calcula o tempo de execução e cria o gerenciador para iniciar o cálculo.
+     * 
+     * @param numPontos número total de pontos a serem usados no cálculo.
+     */
     private static void iniciar(long numPontos){
-        // Obtém o número ideal de threads baseado no número de núcleos disponíveis
+        // Obtém o número de threads disponíveis com base no número de núcleos do processador
         int numThreads = Runtime.getRuntime().availableProcessors(); 
         
-        // Marca o tempo de início
+        // Marca o tempo de início da execução
         long startTime = System.currentTimeMillis();
 
-        // Cria o gerenciador e inicia o cálculo
+        // Cria e inicializa o gerenciador paralelo, que controlará as threads
         GerenciadorParalelo gerenciador = new GerenciadorParalelo(numPontos, numThreads);
-        gerenciador.iniciarCalculo();
+        gerenciador.iniciarCalculo(); // Inicia o cálculo de Pi
 
-        // Marca o tempo de término
+        // Marca o tempo de término da execução
         long endTime = System.currentTimeMillis();
 
-        // Calcula o tempo de execução
+        // Calcula o tempo total de execução
         long duration = endTime - startTime; // em milissegundos
         System.out.println("Tempo total de execução: " + duration + " ms"); 
     }
