@@ -4,11 +4,13 @@
  */
 package com.mycompany.pidemontecarloparalelo;
 
+import java.util.concurrent.Callable;
+
 /**
  *
  * @author rafael
  */
-public class Worker implements Runnable {
+public class Worker implements Callable<Long> {
     private final long numPontos; // Número de pontos para esta thread calcular
     private final CalculadoraPi calculadoraPi; // Instância do calculador de Pi
 
@@ -17,18 +19,14 @@ public class Worker implements Runnable {
         this.calculadoraPi = new CalculadoraPi(numPontos);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
-    public void run() {
-        // Calcular Pi usando o método de Monte Carlo
-        double estimativaPi = calculadoraPi.calcularPi();
-        System.out.println("Estimativa de Pi na thread: " + estimativaPi);
-    }
-
-    public long getNumPontos() {
-        return numPontos;
-    }
-
-    public CalculadoraPi getCalculadoraPi() {
-        return calculadoraPi;
+    public Long call() {
+        // Calcular pontos dentro do círculo
+        calculadoraPi.calcularPi();
+        return calculadoraPi.getPontosDentroDoCirculo();
     }
 }

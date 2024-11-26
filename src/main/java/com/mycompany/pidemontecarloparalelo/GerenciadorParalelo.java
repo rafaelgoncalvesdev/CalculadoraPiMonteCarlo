@@ -4,51 +4,58 @@
  */
 package com.mycompany.pidemontecarloparalelo;
 
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 /**
  *
  * @author rafael
  */
+/**
+ * Gerenciador para calcular Pi de forma paralela.
+ */
 public class GerenciadorParalelo {
-
-    private final long totalPontos; // Número total de pontos
+    private final long numPontos; // Número total de pontos
     private final int numThreads; // Número de threads
 
-    /**
-     * Construtor para inicializar o gerenciador com o número total de pontos e threads.
-     * @param totalPontos número total de pontos para o cálculo de Pi.
-     * @param numThreads número de threads a serem usadas.
-     */
     public GerenciadorParalelo(long totalPontos, int numThreads) {
-        this.totalPontos = totalPontos;
-        this.numThreads = numThreads;
+        this.numPontos = totalPontos;
+        this.numThreads = numThreads > 0 ? numThreads : Runtime.getRuntime().availableProcessors();
     }
 
-    /**
-     * Método que inicia o cálculo de Pi usando threads.
-     */
     public void iniciarCalculo() {
-        System.out.println("Cálculo iniciado!");
-        
-        // Executor para gerenciar as threads
-        ExecutorService executor = Executors.newFixedThreadPool(numThreads);
-        long pontosPorThread = totalPontos / numThreads;
+        System.out.println("Iniciando cálculo com " + numThreads + " threads e " + numPontos + " pontos...");
+        System.out.println("Calculando...");
 
-        // Submete tarefas às threads
+        ExecutorService executor = Executors.newFixedThreadPool(numThreads);
+        long pontosPorThread = numPontos / numThreads;
+
+        // Lista para armazenar os resultados das threads
+        ArrayList<Future<Long>> resultados = new ArrayList<>();
+
+        // Submete as tarefas para as threads
         for (int i = 0; i < numThreads; i++) {
             Worker worker = new Worker(pontosPorThread);
-            executor.submit(worker); // Submete o worker para execução
+            resultados.add(executor.submit(worker));
         }
 
-        executor.shutdown(); // Finaliza o executor após submissão das tarefas
+        executor.shutdown();
 
-        // Aguarda a conclusão de todas as threads
-        while (!executor.isTerminated()) {
-            // Bloqueia até que todas as tarefas terminem
+        // Combina os resultados
+        long totalPontosDentroDoCirculo = 0;
+        try {
+            for (Future<Long> resultado : resultados) {
+                totalPontosDentroDoCirculo += resultado.get(); // Aguarda o resultado de cada thread
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
         }
 
-        System.out.println("Cálculo completo!");
-    }    
+        // Calcula a estimativa final de Pi
+        double estimativaPi = 4.0 * totalPontosDentroDoCirculo / numPontos;
+        System.out.println("Estimativa final de Pi: " + estimativaPi);
+    }
 }

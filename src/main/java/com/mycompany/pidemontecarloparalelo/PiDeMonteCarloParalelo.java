@@ -4,6 +4,8 @@
 
 package com.mycompany.pidemontecarloparalelo;
 
+import java.util.Scanner;
+
 
 /**
  *
@@ -11,11 +13,34 @@ package com.mycompany.pidemontecarloparalelo;
  */
 public class PiDeMonteCarloParalelo {
     public static void main(String[] args) {
-        long totalPontos = 1_000_000; // Exemplo: número total de pontos
-        int numThreads = 4; // Exemplo: número de threads
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Digite o número total de pontos: ");
+        long numPontos = scanner.nextLong(); // Lê o número total de pontos    
+        scanner.close();
+        
+        // Chama o método estático iniciar()
+        iniciar(numPontos);
+    }
+    
+    // Torna o método iniciar estático
+    private static void iniciar(long numPontos){
+        // Obtém o número ideal de threads baseado no número de núcleos disponíveis
+        int numThreads = Runtime.getRuntime().availableProcessors(); 
+        
+        // Marca o tempo de início
+        long startTime = System.currentTimeMillis();
 
-        // Cria e inicia o gerenciador
-        GerenciadorParalelo gerenciador = new GerenciadorParalelo(totalPontos, numThreads);
+        // Cria o gerenciador e inicia o cálculo
+        GerenciadorParalelo gerenciador = new GerenciadorParalelo(numPontos, numThreads);
         gerenciador.iniciarCalculo();
+
+        // Marca o tempo de término
+        long endTime = System.currentTimeMillis();
+
+        // Calcula o tempo de execução
+        long duration = endTime - startTime; // em milissegundos
+        System.out.println("Tempo total de execução: " + duration + " ms"); 
     }
 }
+
+

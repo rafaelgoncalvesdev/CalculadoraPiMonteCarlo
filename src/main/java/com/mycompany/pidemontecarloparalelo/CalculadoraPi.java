@@ -45,4 +45,10 @@ public class CalculadoraPi {
         return 4.0 * pontosDentroDoCirculo / numPontos;
     }
 
+    public long getPontosDentroDoCirculo() {
+        return pontosDentroDoCirculo;
+    }
+
+    
+    
 }
