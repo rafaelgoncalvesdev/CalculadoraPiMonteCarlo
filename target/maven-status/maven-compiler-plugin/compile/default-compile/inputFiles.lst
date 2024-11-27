@@ -1,5 +1,7 @@
 /home/rafael/NetBeansProjects/PiDeMonteCarloParalelo/src/main/java/com/mycompany/pidemontecarloparalelo/CalculadoraPi.java
 /home/rafael/NetBeansProjects/PiDeMonteCarloParalelo/src/main/java/com/mycompany/pidemontecarloparalelo/GerenciadorParalelo.java
 /home/rafael/NetBeansProjects/PiDeMonteCarloParalelo/src/main/java/com/mycompany/pidemontecarloparalelo/PiDeMonteCarloParalelo.java
-/home/rafael/NetBeansProjects/PiDeMonteCarloParalelo/src/main/java/com/mycompany/pidemontecarloparalelo/VisualizadorDePontos.java
+/home/rafael/NetBeansProjects/PiDeMonteCarloParalelo/src/main/java/com/mycompany/pidemontecarloparalelo/PointData.java
+/home/rafael/NetBeansProjects/PiDeMonteCarloParalelo/src/main/java/com/mycompany/pidemontecarloparalelo/Simulation.java
+/home/rafael/NetBeansProjects/PiDeMonteCarloParalelo/src/main/java/com/mycompany/pidemontecarloparalelo/SimulationManager.java
 /home/rafael/NetBeansProjects/PiDeMonteCarloParalelo/src/main/java/com/mycompany/pidemontecarloparalelo/Worker.java

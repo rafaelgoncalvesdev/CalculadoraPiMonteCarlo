@@ -59,5 +59,9 @@ public class CalculadoraPi {
     public long getPontosDentroDoCirculo() {
         return pontosDentroDoCirculo;
     }
+    
+    public Random getRandom() {
+        return this.random;
+    }
 }
 

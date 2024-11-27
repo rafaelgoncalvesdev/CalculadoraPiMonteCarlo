@@ -1,5 +1,8 @@
-com/mycompany/pidemontecarloparalelo/GerenciadorParalelo.class
+com/mycompany/pidemontecarloparalelo/SimulationManager.class
 com/mycompany/pidemontecarloparalelo/Worker.class
-com/mycompany/pidemontecarloparalelo/CalculadoraPi.class
-com/mycompany/pidemontecarloparalelo/VisualizadorDePontos.class
 com/mycompany/pidemontecarloparalelo/PiDeMonteCarloParalelo.class
+com/mycompany/pidemontecarloparalelo/GerenciadorParalelo.class
+com/mycompany/pidemontecarloparalelo/PointData.class
+com/mycompany/pidemontecarloparalelo/CalculadoraPi.class
+com/mycompany/pidemontecarloparalelo/Simulation.class
+com/mycompany/pidemontecarloparalelo/Simulation$PainelSimulacao.class
