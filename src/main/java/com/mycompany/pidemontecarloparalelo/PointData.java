@@ -28,6 +28,7 @@ public class PointData {
     }
 
     public boolean isDentroDoCirculo() {
-        return dentroDoCirculo;
+        double distanciaQuadrada = getX() * getX() + getY() * getY();
+        return distanciaQuadrada <= 1.0; // Comparação precisa para o círculo unitário
     }
 }
